@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import futurarcLogo from "@/assets/futurearc-logo.png";
 
 const HeroSection = () => {
   const [email, setEmail] = useState("");
@@ -22,11 +23,12 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Subtle gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-card" />
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-card hero-gradient" />
       
-      {/* Ambient glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-primary/10 rounded-full blur-3xl animate-pulse-glow" />
+      {/* Ambient glow orbs */}
+      <div className="absolute top-1/4 left-1/3 w-[500px] h-[500px] bg-primary/8 rounded-full blur-[120px] animate-pulse-glow" />
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-accent/6 rounded-full blur-[100px] animate-pulse-glow" style={{ animationDelay: '1.5s' }} />
 
       <div className="container relative z-10 px-6">
         <motion.div
@@ -35,15 +37,29 @@ const HeroSection = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="max-w-3xl mx-auto text-center"
         >
+          {/* Logo */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.1 }}
+            className="mb-8"
+          >
+            <img 
+              src={futurarcLogo} 
+              alt="Futurearc" 
+              className="h-12 sm:h-14 mx-auto object-contain"
+            />
+          </motion.div>
+
           {/* Coming 2026 badge */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 mb-8 rounded-full border border-border bg-card/50 backdrop-blur-sm"
+            className="inline-flex items-center gap-2 px-4 py-1.5 mb-8 rounded-full border border-primary/30 bg-primary/5 backdrop-blur-sm"
           >
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            <span className="text-sm font-medium text-muted-foreground">Coming 2026</span>
+            <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+            <span className="text-sm font-medium text-accent">Coming 2026</span>
           </motion.div>
 
           {/* Headline */}
@@ -80,10 +96,10 @@ const HeroSection = () => {
               placeholder="your@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="h-12 bg-card border-border focus:border-primary focus:ring-primary/20"
+              className="h-12 bg-card/50 border-border focus:border-primary focus:ring-primary/20 backdrop-blur-sm"
               required
             />
-            <Button type="submit" size="lg" className="h-12 px-6 glow-primary">
+            <Button type="submit" size="lg" className="h-12 px-6 bg-primary hover:bg-primary/90 text-primary-foreground glow-primary">
               Join the waitlist
               <ArrowRight className="ml-2 w-4 h-4" />
             </Button>

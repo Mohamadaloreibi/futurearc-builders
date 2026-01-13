@@ -15,7 +15,7 @@ const TrustSection = () => {
             <div className="flex items-center gap-1">
               <span className="w-2 h-2 rounded-full bg-primary" />
               <span className="w-2 h-2 rounded-full bg-primary/60" />
-              <span className="w-2 h-2 rounded-full bg-primary/30" />
+              <span className="w-2 h-2 rounded-full bg-accent/40" />
             </div>
             <span className="text-sm text-muted-foreground">
               Launching in 2026. Built in public by{" "}

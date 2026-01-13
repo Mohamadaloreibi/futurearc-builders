@@ -20,7 +20,7 @@ const EarlyAccessSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <span className="inline-block px-3 py-1 mb-6 text-sm font-medium text-primary bg-primary/10 rounded-full">
+            <span className="inline-block px-4 py-1.5 mb-6 text-sm font-medium text-accent bg-accent/10 rounded-full border border-accent/20">
               Limited spots
             </span>
             <h2 className="text-3xl sm:text-4xl font-semibold mb-4">
@@ -47,8 +47,8 @@ const EarlyAccessSection = () => {
                 transition={{ delay: 0.3 + index * 0.1 }}
                 className="flex items-center gap-3"
               >
-                <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <Check className="w-4 h-4 text-primary" />
+                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center flex-shrink-0">
+                  <Check className="w-4 h-4 text-accent" />
                 </div>
                 <span className="text-foreground">{benefit}</span>
               </motion.div>

@@ -58,11 +58,11 @@ const WaitlistForm = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.6 }}
             onSubmit={handleSubmit}
-            className="space-y-6 p-8 rounded-2xl bg-card border border-border"
+            className="space-y-6 p-8 rounded-2xl bg-card border border-border card-glow"
           >
             {/* Email */}
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email" className="text-foreground">Email</Label>
               <Input
                 id="email"
                 type="email"
@@ -72,13 +72,13 @@ const WaitlistForm = () => {
                   setFormData({ ...formData, email: e.target.value })
                 }
                 required
-                className="h-11 bg-background border-border focus:border-primary"
+                className="h-11 bg-background border-border focus:border-primary focus:ring-1 focus:ring-primary/20"
               />
             </div>
 
             {/* Experience Level */}
             <div className="space-y-3">
-              <Label>Experience level</Label>
+              <Label className="text-foreground">Experience level</Label>
               <RadioGroup
                 value={formData.experience}
                 onValueChange={(value) =>
@@ -99,7 +99,7 @@ const WaitlistForm = () => {
                     />
                     <Label
                       htmlFor={option.value}
-                      className="px-4 py-2 rounded-lg border border-border bg-background cursor-pointer transition-all peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/10 peer-data-[state=checked]:text-primary hover:border-muted-foreground/30"
+                      className="px-4 py-2 rounded-lg border border-border bg-background cursor-pointer transition-all peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/10 peer-data-[state=checked]:text-primary hover:border-primary/40"
                     >
                       {option.label}
                     </Label>
@@ -110,7 +110,7 @@ const WaitlistForm = () => {
 
             {/* Interests */}
             <div className="space-y-2">
-              <Label htmlFor="interests">What do you want to learn?</Label>
+              <Label htmlFor="interests" className="text-foreground">What do you want to learn?</Label>
               <Textarea
                 id="interests"
                 placeholder="e.g., Full-stack development, AI integration, building SaaS..."
@@ -118,14 +118,14 @@ const WaitlistForm = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, interests: e.target.value })
                 }
-                className="min-h-[100px] bg-background border-border focus:border-primary resize-none"
+                className="min-h-[100px] bg-background border-border focus:border-primary focus:ring-1 focus:ring-primary/20 resize-none"
               />
             </div>
 
             <Button
               type="submit"
               size="lg"
-              className="w-full h-12 glow-primary"
+              className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground glow-primary"
               disabled={isSubmitting}
             >
               {isSubmitting ? (
