@@ -1,16 +1,19 @@
+import futurarcLogo from "@/assets/futurearc-logo.png";
+
 const Footer = () => {
   return (
     <footer className="py-8 border-t border-border">
       <div className="container px-6">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-md bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground text-xs font-bold">F</span>
-            </div>
-            <span className="text-sm font-medium">Futurearc</span>
+          <div className="flex items-center gap-3">
+            <img 
+              src={futurarcLogo} 
+              alt="Futurearc" 
+              className="h-8 object-contain"
+            />
           </div>
           <p className="text-sm text-muted-foreground">
-            © 2026 Futurearc. All rights reserved.
+            © 2026 Futurearc Academy. All rights reserved.
           </p>
         </div>
       </div>

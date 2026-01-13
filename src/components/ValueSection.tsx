@@ -51,9 +51,9 @@ const ValueSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="group p-6 rounded-2xl bg-card border border-border hover:border-primary/30 transition-all duration-300"
+              className="group p-6 rounded-2xl bg-card border border-border hover:border-primary/40 transition-all duration-300 card-glow"
             >
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center mb-4 group-hover:from-primary/30 group-hover:to-accent/20 transition-all duration-300">
                 <value.icon className="w-6 h-6 text-primary" />
               </div>
               <h3 className="text-lg font-medium mb-2">{value.title}</h3>
