@@ -33,20 +33,21 @@ const HeroLanding = () => {
         }}
       />
 
+      {/* Logo - fixed bottom left */}
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6 }}
+        className="absolute bottom-8 left-6 md:left-12 z-10"
+      >
+        <img
+          src={logo}
+          alt="Futurearc"
+          className="h-8 md:h-10"
+        />
+      </motion.div>
+
       <div className="relative z-10 text-center max-w-3xl mx-auto">
-        {/* Logo */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-8"
-        >
-          <img
-            src={logo}
-            alt="Futurearc"
-            className="h-12 md:h-16 mx-auto"
-          />
-        </motion.div>
 
         {/* Coming 2026 badge */}
         <motion.div
