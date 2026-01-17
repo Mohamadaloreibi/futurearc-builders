@@ -23,7 +23,7 @@ const OwlMascot = ({ onClick }: OwlMascotProps) => {
             className="relative bg-card/90 backdrop-blur-md border border-border/50 rounded-xl px-4 py-2.5 shadow-xl max-w-[160px]"
           >
             <p className="text-xs text-muted-foreground tracking-wide">
-              Join the waitlist →
+              Psst… want early access?
             </p>
             {/* Subtle bubble tail */}
             <div className="absolute -bottom-1.5 right-8 w-3 h-3 bg-card/90 border-r border-b border-border/50 rotate-45 transform" />
