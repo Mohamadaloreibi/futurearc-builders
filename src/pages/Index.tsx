@@ -1,18 +1,17 @@
-import HeroSection from "@/components/HeroSection";
-import ValueSection from "@/components/ValueSection";
-import EarlyAccessSection from "@/components/EarlyAccessSection";
-import WaitlistForm from "@/components/WaitlistForm";
-import TrustSection from "@/components/TrustSection";
+import { useState } from "react";
+import HeroLanding from "@/components/HeroLanding";
+import OwlMascot from "@/components/OwlMascot";
+import WaitlistModal from "@/components/WaitlistModal";
 import Footer from "@/components/Footer";
 
 const Index = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-background text-foreground dark">
-      <HeroSection />
-      <ValueSection />
-      <EarlyAccessSection />
-      <WaitlistForm />
-      <TrustSection />
+      <HeroLanding />
+      <OwlMascot onClick={() => setIsModalOpen(true)} />
+      <WaitlistModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       <Footer />
     </div>
   );
