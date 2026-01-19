@@ -86,22 +86,42 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed inset-x-4 top-1/2 -translate-y-1/2 md:inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 z-50 w-auto md:w-full md:max-w-md max-h-[90vh] overflow-y-auto"
+            className="fixed inset-x-3 top-[5vh] bottom-[5vh] md:inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 z-50 w-auto md:w-full md:max-w-md md:max-h-[90vh] flex flex-col"
           >
-            <div className="relative bg-card border border-border rounded-xl p-5 md:p-6 shadow-2xl overflow-hidden">
+            <div className="relative bg-card border border-border rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-full">
               {/* Background gradient */}
-              <div className="absolute inset-0 hero-gradient opacity-50" />
+              <div className="absolute inset-0 hero-gradient opacity-50 pointer-events-none" />
               
-              {/* Close button */}
-              <button
-                onClick={handleClose}
-                className="absolute top-4 right-4 p-2 text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-muted z-10"
-                aria-label="Close modal"
-              >
-                <X className="w-5 h-5" />
-              </button>
+              {/* Sticky Header */}
+              <div className="relative z-20 bg-card/95 backdrop-blur-sm border-b border-border/50 p-4 md:p-5 flex-shrink-0">
+                {/* Close button */}
+                <button
+                  onClick={handleClose}
+                  className="absolute top-3 right-3 p-2 text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-muted z-10"
+                  aria-label="Close modal"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+                
+                <div className="text-center pr-8">
+                  <div className="flex items-center justify-center gap-2 mb-1">
+                    <img
+                      src={owlMascot}
+                      alt="Futurearc Owl"
+                      className="w-7 h-7"
+                    />
+                    <h2 className="text-lg md:text-xl font-bold text-foreground">
+                      Futurearc Academy
+                    </h2>
+                  </div>
+                  <span className="inline-block px-2 py-0.5 text-xs font-medium bg-primary/10 text-primary rounded-full">
+                    Coming 2026
+                  </span>
+                </div>
+              </div>
 
-              <div className="relative z-10">
+              {/* Scrollable Content */}
+              <div className="relative z-10 flex-1 overflow-y-auto overscroll-contain p-4 md:p-5">
                 <AnimatePresence mode="wait">
                   {!isSubmitted ? (
                     <motion.div
@@ -110,25 +130,9 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
                       exit={{ opacity: 0, y: -20 }}
                       transition={{ duration: 0.2 }}
                     >
-                      {/* Header */}
-                      <div className="text-center mb-4">
-                        <div className="flex items-center justify-center gap-2 mb-2">
-                          <img
-                            src={owlMascot}
-                            alt="Futurearc Owl"
-                            className="w-8 h-8"
-                          />
-                          <h2 className="text-xl md:text-2xl font-bold text-foreground">
-                            Futurearc Academy
-                          </h2>
-                        </div>
-                        <span className="inline-block px-2 py-0.5 text-xs font-medium bg-primary/10 text-primary rounded-full mb-2">
-                          Coming 2026
-                        </span>
-                        <p className="text-muted-foreground text-xs md:text-sm">
-                          Build real projects. Learn how developers think. Use AI the right way.
-                        </p>
-                      </div>
+                      <p className="text-muted-foreground text-xs md:text-sm text-center mb-4">
+                        Build real projects. Learn how developers think. Use AI the right way.
+                      </p>
 
                       {/* Form */}
                       <form onSubmit={handleSubmit} className="space-y-3">
