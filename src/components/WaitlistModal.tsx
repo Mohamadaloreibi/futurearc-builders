@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -21,7 +21,30 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
   const [interests, setInterests] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showBottomFade, setShowBottomFade] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
+
+  useEffect(() => {
+    const checkScroll = () => {
+      if (scrollRef.current) {
+        const { scrollTop, scrollHeight, clientHeight } = scrollRef.current;
+        const isScrollable = scrollHeight > clientHeight;
+        const isAtBottom = scrollTop + clientHeight >= scrollHeight - 5;
+        setShowBottomFade(isScrollable && !isAtBottom);
+      }
+    };
+
+    checkScroll();
+    const scrollEl = scrollRef.current;
+    scrollEl?.addEventListener("scroll", checkScroll);
+    window.addEventListener("resize", checkScroll);
+
+    return () => {
+      scrollEl?.removeEventListener("scroll", checkScroll);
+      window.removeEventListener("resize", checkScroll);
+    };
+  }, [isOpen, isSubmitted]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -121,7 +144,10 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
               </div>
 
               {/* Scrollable Content */}
-              <div className="relative z-10 flex-1 overflow-y-auto overscroll-contain p-4 md:p-5">
+              <div 
+                ref={scrollRef}
+                className="relative z-10 flex-1 overflow-y-auto overscroll-contain p-4 md:p-5"
+              >
                 <AnimatePresence mode="wait">
                   {!isSubmitted ? (
                     <motion.div
@@ -268,6 +294,11 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
                   )}
                 </AnimatePresence>
               </div>
+              
+              {/* Bottom fade indicator */}
+              <div 
+                className={`absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-card to-transparent pointer-events-none z-20 transition-opacity duration-200 ${showBottomFade ? 'opacity-100' : 'opacity-0'}`}
+              />
             </div>
           </motion.div>
         </>
