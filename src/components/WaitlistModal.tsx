@@ -146,7 +146,7 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
               {/* Scrollable Content */}
               <div 
                 ref={scrollRef}
-                className="relative z-10 flex-1 overflow-y-auto overscroll-contain p-4 md:p-5"
+                className="relative z-10 flex-1 overflow-y-auto overscroll-contain p-4 md:p-5 pb-2"
               >
                 <AnimatePresence mode="wait">
                   {!isSubmitted ? (
@@ -161,7 +161,7 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
                       </p>
 
                       {/* Form */}
-                      <form onSubmit={handleSubmit} className="space-y-3">
+                      <div className="space-y-3">
                         {/* Email */}
                         <div className="space-y-1">
                           <Label htmlFor="email" className="text-foreground text-sm">
@@ -218,24 +218,7 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
                             className="bg-background/50 border-border focus:border-primary resize-none h-16 text-sm"
                           />
                         </div>
-
-                        {/* Submit */}
-                        <Button
-                          type="submit"
-                          disabled={isSubmitting}
-                          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-5 glow-primary"
-                        >
-                          {isSubmitting ? (
-                            <motion.div
-                              animate={{ rotate: 360 }}
-                              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                              className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full"
-                            />
-                          ) : (
-                            "Join the waitlist"
-                          )}
-                        </Button>
-                      </form>
+                      </div>
                     </motion.div>
                   ) : (
                     <motion.div
@@ -297,8 +280,31 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
               
               {/* Bottom fade indicator */}
               <div 
-                className={`absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-card to-transparent pointer-events-none z-20 transition-opacity duration-200 ${showBottomFade ? 'opacity-100' : 'opacity-0'}`}
+                className={`absolute bottom-14 left-0 right-0 h-8 bg-gradient-to-t from-card to-transparent pointer-events-none z-20 transition-opacity duration-200 ${showBottomFade ? 'opacity-100' : 'opacity-0'}`}
               />
+
+              {/* Sticky Submit Button */}
+              {!isSubmitted && (
+                <div className="relative z-20 bg-card/95 backdrop-blur-sm border-t border-border/50 p-4 md:p-5 pt-3 flex-shrink-0">
+                  <form onSubmit={handleSubmit}>
+                    <Button
+                      type="submit"
+                      disabled={isSubmitting || !email}
+                      className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-5 glow-primary"
+                    >
+                      {isSubmitting ? (
+                        <motion.div
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                          className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full"
+                        />
+                      ) : (
+                        "Join the waitlist"
+                      )}
+                    </Button>
+                  </form>
+                </div>
+              )}
             </div>
           </motion.div>
         </>
