@@ -9,6 +9,23 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import owlMascot from "@/assets/owl-mascot.png";
+import { z } from "zod";
+
+// Validation schema matching database constraints
+const waitlistSchema = z.object({
+  email: z
+    .string()
+    .trim()
+    .min(1, "Email is required")
+    .max(255, "Email must be less than 255 characters")
+    .email("Invalid email address"),
+  experience: z.enum(["beginner", "junior", "intermediate"]),
+  interests: z
+    .string()
+    .max(1000, "Interests must be less than 1000 characters")
+    .nullable()
+    .optional(),
+});
 
 interface WaitlistModalProps {
   isOpen: boolean;
@@ -50,10 +67,28 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    const { error } = await supabase.from("waitlist_signups").insert({
-      email,
+    // Validate input before submission
+    const validationResult = waitlistSchema.safeParse({
+      email: email.trim(),
       experience,
-      interests: interests || null,
+      interests: interests.trim() || null,
+    });
+
+    if (!validationResult.success) {
+      const firstError = validationResult.error.errors[0];
+      toast({
+        title: "Validation Error",
+        description: firstError.message,
+        variant: "destructive",
+      });
+      setIsSubmitting(false);
+      return;
+    }
+
+    const { error } = await supabase.from("waitlist_signups").insert({
+      email: validationResult.data.email,
+      experience: validationResult.data.experience,
+      interests: validationResult.data.interests || null,
     });
 
     setIsSubmitting(false);
@@ -63,6 +98,13 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
         toast({
           title: "Already signed up",
           description: "This email is already on the waitlist.",
+          variant: "destructive",
+        });
+      } else if (error.code === "23514") {
+        // Check constraint violation
+        toast({
+          title: "Invalid input",
+          description: "Please check your email format and try again.",
           variant: "destructive",
         });
       } else {
@@ -215,6 +257,7 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
                             placeholder="e.g., Full-stack development, AI/ML..."
                             value={interests}
                             onChange={(e) => setInterests(e.target.value)}
+                            maxLength={1000}
                             className="bg-background/50 border-border focus:border-primary resize-none h-16 text-sm"
                           />
                         </div>
