@@ -151,14 +151,14 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed inset-x-3 top-[5vh] bottom-[5vh] md:inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 z-50 w-auto md:w-full md:max-w-md md:max-h-[90vh] flex flex-col"
+            className="fixed inset-x-3 top-[3vh] bottom-[3vh] md:inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 z-50 w-auto md:w-full md:max-w-md md:max-h-[85vh] lg:max-h-[80vh] flex flex-col"
           >
             <div className="relative bg-card border border-border rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-full">
               {/* Background gradient */}
               <div className="absolute inset-0 hero-gradient opacity-50 pointer-events-none" />
               
               {/* Sticky Header */}
-              <div className="relative z-20 bg-card/95 backdrop-blur-sm border-b border-border/50 p-4 md:p-5 flex-shrink-0">
+              <div className="relative z-20 bg-card/95 backdrop-blur-sm border-b border-border/50 p-3 md:p-4 flex-shrink-0">
                 {/* Close button */}
                 <button
                   onClick={handleClose}
@@ -203,7 +203,7 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
                       </p>
 
                       {/* Form */}
-                      <div className="space-y-3">
+                      <div className="space-y-2">
                         {/* Email */}
                         <div className="space-y-1">
                           <Label htmlFor="email" className="text-foreground text-sm">
@@ -258,7 +258,7 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
                             value={interests}
                             onChange={(e) => setInterests(e.target.value)}
                             maxLength={1000}
-                            className="bg-background/50 border-border focus:border-primary resize-none h-16 text-sm"
+                            className="bg-background/50 border-border focus:border-primary resize-none h-14 text-sm"
                           />
                         </div>
                       </div>
@@ -328,7 +328,7 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
 
               {/* Sticky Submit Button */}
               {!isSubmitted && (
-                <div className="relative z-20 bg-card/95 backdrop-blur-sm border-t border-border/50 p-4 md:p-5 pt-3 flex-shrink-0">
+                <div className="relative z-20 bg-card/95 backdrop-blur-sm border-t border-border/50 p-3 md:p-4 flex-shrink-0">
                   <form onSubmit={handleSubmit}>
                     <Button
                       type="submit"
