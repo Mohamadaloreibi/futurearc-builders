@@ -151,9 +151,9 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed inset-x-3 top-[3vh] bottom-[3vh] md:inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 z-50 w-auto md:w-full md:max-w-md md:max-h-[85vh] lg:max-h-[80vh] flex flex-col"
+            className="fixed inset-x-3 top-[2vh] bottom-[2vh] md:inset-x-auto md:top-[5vh] md:bottom-[5vh] md:left-1/2 md:-translate-x-1/2 z-50 w-auto md:w-full md:max-w-md flex flex-col"
           >
-            <div className="relative bg-card border border-border rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-full">
+            <div className="relative bg-card border border-border rounded-xl shadow-2xl overflow-hidden flex flex-col h-full">
               {/* Background gradient */}
               <div className="absolute inset-0 hero-gradient opacity-50 pointer-events-none" />
               
